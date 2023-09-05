@@ -8,8 +8,8 @@
 </head>
 <body>
     <h1>User home page</h1>
-    Role-{{  Auth::user()->role}}
-   /<form method="post" action={{route('logout')}}>
+    Role-{{Auth::user()->role}}
+   <form method="post" action={{route('logout')}}>
     @csrf
         <input type="submit" value="Logout"></form>
 </body>

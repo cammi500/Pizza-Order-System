@@ -31,13 +31,13 @@ Route::middleware([
       
         //admin
         // categories routes
-    Route::group(['prefix'=>'category'],function(){
+    Route::group(['prefix'=>'category','middleware' =>'admin_auth'],function(){
     Route::get('list',[CategoryController::class,'list'])->name('category#list') ;
 });
     
     //users routes
     //home
-    Route::group(['prefix'=>'user'],function(){
+    Route::group(['prefix'=>'user','middleware' =>'user_auth'],function(){
         Route::get('home',function(){
             return view('user.home');
         })->name('user#home') ;
