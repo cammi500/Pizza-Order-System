@@ -25,7 +25,7 @@
     @enderror
         <div class="form-group">
             <label>Phone</label>
-            <input class="au-input au-input--full" type="number" name="phone" placeholder="Ph number">
+            <input class="au-input au-input--full" type="number" name="phone" placeholder="09xxxxxxx">
         </div>
         @error('phone')
         <small class="text-danger">{{$message}}</small>

@@ -32,7 +32,8 @@
 
     <!-- Main CSS-->
     <link href="{{asset('admin/css/theme.css')}}" rel="stylesheet" media="all">
-
+{{-- font Awesome --}}
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="animsition">
@@ -128,7 +129,13 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
+
+                                            @if(Auth::user()->image==null)
+                                            <img src="{{asset('image/default-user-image-png.png')}}"/>
+                                            @else
                                             <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                            @endif
+
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
@@ -137,7 +144,11 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
+                                                        @if(Auth::user()->image==null)
+                                                        <img src="{{asset('image/default-user-image-png.png')}}"/>
+                                                        @else
                                                         <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                                        @endif
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -149,7 +160,7 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="{{route('admin#details')}}">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                             </div>

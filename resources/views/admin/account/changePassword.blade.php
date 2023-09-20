@@ -16,6 +16,16 @@
                         <div class="card-title">
                             <h3 class="text-center title-2">Change Password</h3>
                         </div>
+                        @if (Session('changeSuccess'))
+                        <div class="col-12">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ Session('changeSuccess') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                              </div>
+                        </div>
+                        @endif
                         <hr>
                         <form action="{{route('admin#changePassword')}}" method="post" novalidate="novalidate">
                            

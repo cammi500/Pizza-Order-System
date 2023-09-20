@@ -17,7 +17,7 @@
                     <div class="table-data__tool-right">
                         <a href="{{route('category#createPage')}}">
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="fa-solid fa-circle-xmark "></i>Add Category
+                                <i class="fa-solid fa-user"> </i>Add Category
                             </button>  
                         </a>
                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
