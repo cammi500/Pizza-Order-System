@@ -19,9 +19,12 @@ use Whoops\Run;
 */
 
 //login/register routes
-Route::redirect('/','loginPage');
-Route::get('loginPage',[AuthController::class,'loginPage'])->name('auth#loginPage') ;
-Route::get('RegisterPage',[AuthController::class,'RegisterPage'])->name('auth#registerPage') ;
+
+Route::middleware(['admin_auth'])->group(function(){
+    Route::redirect('/','loginPage');
+    Route::get('loginPage',[AuthController::class,'loginPage'])->name('auth#loginPage') ;
+    Route::get('RegisterPage',[AuthController::class,'RegisterPage'])->name('auth#registerPage') ;
+});
 
 
 
@@ -53,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
      
         Route::get('details',[AdminController::class,'details'])->name('admin#details');
         Route::get('edit',[AdminController::class,'edit'])->name('admin#edit');
+        Route::post('update/{id}',[AdminController::class,'update'])->name('admin#update');
     });
       });
       

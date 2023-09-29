@@ -3,6 +3,19 @@
 {{-- main content --}}
 @section('content')
 <div class="main-content">
+
+    <div class="row">
+        <div class="col-3 offset-7 mb-2">
+            @if(session('updateSucccess'))
+            <div class="">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-circle-xmark"></i>{{session('updateSuccess')}}
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>               </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             {{-- <div class="row">
@@ -23,13 +36,14 @@
                                 @if(Auth::user()->image==null)
                                 <img src="{{asset('image/default-user-image-png.png')}}"/>
                                 @else
-                                <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                <img src="{{asset('storage/'.Auth::user()->image)}}" alt="John Doe" />
                                 @endif
                             </div>
                             <div class="col-5 offset-1">
                                 <h4 class="my-3"><i class="fa-solid fa-user me-5"></i>{{Auth::user()->name}}</h4>
                                 <h4 class="my-3"><i class="fa-solid fa-envelope me-2"></i>{{Auth::user()->email}}</h4>
                                 <h4 class="my-3"><i class="fa-solid fa-phone me-2"></i>{{Auth::user()->phone}}</h4>
+                                <h4 class="my-3"><i class="fa-solid fa-user-clock me-2"></i>{{Auth::user()->gender}}</h4>
                                 <h4 class="my-3"><i class="fa-solid fa-address-card me-2"></i>{{Auth::user()->address}}</h4>
                                 <h4 class="my-3"><i class="fa-solid fa-user-clock me-2"></i>{{Auth::user()->created_at->format('j-F-Y')}}</h4>
 

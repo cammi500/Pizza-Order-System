@@ -30,6 +30,17 @@
         @error('phone')
         <small class="text-danger">{{$message}}</small>
     @enderror
+    <div class="form-group">
+        <label>Gender</label>
+        <select name="gender" id="gender" class=" form-control au-input au-input--full">
+            <option >Choose Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+    </div>
+    @error('phone')
+    <small class="text-danger">{{$message}}</small>
+@enderror
         <div class="form-group">
             <label> Address</label>
             <input class="au-input au-input--full" type="text" name="address" placeholder="Address">

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
+use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use PharIo\Manifest\Email;
 
 class AdminController extends Controller
 {
@@ -44,9 +48,48 @@ class AdminController extends Controller
         
         return view('admin.account.edit');
     }
-    
+    public function update($id,Request $request){
 
-    //password validation ckeck
+        $this->accountValidationCheck($request);
+        $data=$this->getUserData($request);
+         //image
+         if ($request->hasFile('image')){
+            $dbImage =User::where('id',$id)->first();
+            $dbImage =$dbImage->image;
+           if($dbImage!=null){
+            Storage::delete('public/'.$dbImage);
+           }
+         }
+         $filename =uniqid().$request->file('image')->getClientOriginalName();
+         $request->file('image')->storeAs('public',$filename);
+         $data['image'] =$filename;
+        
+        User::where('id',$id)->update($data);
+        return redirect()->route('admin#details')->with(['updateSuccess'=>'Admin Account Created']);
+    }
+    
+        //request user 
+  private function getUserData($request){
+    return [
+        'name' => $request->name,
+        'email' => $request->email,
+        'gender' => $request->gender,
+        'phone' => $request->phone,
+        'address' => $request->address,
+        'updated_at' => Carbon::now()
+    ];
+  }
+  //account validation check
+  private function accountValidationCheck($request){
+    Validator::make($request->all(),[
+        'name' =>  'required',
+        'email' => 'required',
+        'gender' => 'required',
+        'phone' => 'required',
+        'address' => 'required',
+        ])->validate();
+  }
+        //password validation ckeck
     private function passwordValidationCheck($request){
         Validator::make($request->all(),[
             'oldPassword' =>'required|min:6|max:12',
