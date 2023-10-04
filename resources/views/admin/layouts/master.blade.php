@@ -57,10 +57,10 @@
                             <a href="{{route('category#list')}}">
                                 <i class="fas fa-chart-bar"></i>Category</a>
                         </li>
-                        {{-- <li>
-                            <a href="customerList.html">
-                                <i class="fas fa-chart-bar"></i>Customers</a>
-                        </li> --}}
+                        <li>
+                            <a href="{{route('product#list')}}">
+                                <i class="fa-solid fa-pizza-slice"></i>Product</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

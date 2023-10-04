@@ -26,7 +26,7 @@
                                         @endif
 
                                         <div class="mt-3">
-                                            <input type="file" name="image" id="" class="form-control">
+                                            <input type="file" name="image" id="" class="form-control @error('image')is-invalid @enderror">
                                         </div>
                                         <div class="mt-3">
                                         <button class="btn bg-dark text-white col-12" type="submit">

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Whoops\Run;
 
@@ -53,10 +54,20 @@ Route::middleware(['auth'])->group(function () {
         Route::post('change/password',[AdminController::class,'changePassword'])->name('admin#changePassword');
    
         // profile
-     
         Route::get('details',[AdminController::class,'details'])->name('admin#details');
         Route::get('edit',[AdminController::class,'edit'])->name('admin#edit');
         Route::post('update/{id}',[AdminController::class,'update'])->name('admin#update');
+    });
+
+    // products
+    Route::prefix('products')->group(function(){
+        Route::get('list',[ProductController::class,'list'])->name('product#list');
+        Route::get('create',[ProductController::class,'createPage'])->name('product#createPage');
+        Route::post('create',[ProductController::class,'create'])->name('product#create');
+        Route::get('delete/{id}',[ProductController::class,'delete'])->name('product#delete');
+        Route::get('edit/{id}',[ProductController::class,'edit'])->name('product#edit');
+        Route::get('updatePage/{id}',[ProductController::class,'updatePage'])->name('product#updatePage');
+        Route::post('update',[ProductController::class,'update'])->name('product#update');
     });
       });
       
