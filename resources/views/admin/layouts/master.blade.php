@@ -131,7 +131,12 @@
                                         <div class="image">
 
                                             @if(Auth::user()->image==null)
-                                            <img src="{{asset('image/default-user-image-png.png')}}"/>
+                                            {{-- <img src="{{asset('image/default-user-image-png.png')}}"/> --}}
+                                                    @if (Auth::user()->gender == 'male')
+                                                    <img src="{{asset('image/default-user.jpg')}}" class="img-thumbnail shadow-sm">
+                                                    @else
+                                                    <img src="{{asset('image/default-female.jpg')}}" class="img-thumbnail shadow-sm">
+                                                    @endif  
                                             @else
                                             <img src="{{asset('storage/'.Auth::user()->image)}}" alt="John Doe" />
                                             @endif
@@ -145,7 +150,12 @@
                                                 <div class="image">
                                                     <a href="#">
                                                         @if(Auth::user()->image==null)
-                                                        <img src="{{asset('image/default-user-image-png.png')}}"/>
+                                                            {{-- <img src="{{asset('image/default-user-image-png.png')}}"/> --}}
+                                                            @if (Auth::user()->gender == 'male')
+                                                            <img src="{{asset('image/default-user.jpg')}}" class="img-thumbnail shadow-sm">
+                                                            @else
+                                                            <img src="{{asset('image/default-female.jpg')}}" class="img-thumbnail shadow-sm">
+                                                            @endif
                                                         @else
                                                         <img src="{{asset('storage/'.Auth::user()->image)}}" alt="John Doe" />
                                                         @endif
@@ -162,6 +172,12 @@
                                                 <div class="account-dropdown__item">
                                                     <a href="{{route('admin#details')}}">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{route('admin#list')}}">
+                                                        <i class="zmdi zmdi-account"></i>Admin List</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">

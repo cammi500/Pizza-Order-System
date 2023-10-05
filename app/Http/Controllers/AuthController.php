@@ -16,6 +16,7 @@ class AuthController extends Controller
     }
         //direct login page
     public function registerPage(){
+        // dd('hit');
         return view('register');
     }
         //direct dashboard 

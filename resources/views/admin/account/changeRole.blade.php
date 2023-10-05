@@ -9,30 +9,35 @@
             <div class="col-lg-10 offset-1">
                 <div class="card">
                     <div class="card-body">
+                        <div class="">
+                            {{-- <a href="{{route('product#list')}}" class="text-decoration-none"> --}}
+                              <i class="fa-solid fa-arrow-left text-dark" onclick="history.back()"></i>
+                              
+                          </div>
                         <div class="card-title">
-                            <h3 class="text-center title-2">Account Profile</h3>
+                            <h3 class="text-center title-2">Change Role</h3>
                         </div>
                        
                         <hr>
 
-                        <form action="{{route('admin#update',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('admin#change',$account->id)}}" method="post" enctype="multipart/form-data">
                              @csrf
                         <div class="row">
                                     <div class="col-4 offset-1">
-                                        @if(Auth::user()->image==null)
+                                        @if($account->image==null)
                                         {{-- <img src="{{asset('image/default-user-image-png.png')}}" class="shadow-sm"/> --}}
-                                          @if (Auth::user()->gender == 'male')
+                                          @if ($account->gender == 'male')
                                             <img src="{{asset('image/default-user.jpg')}}" class="img-thumbnail shadow-sm">
                                             @else
                                             <img src="{{asset('image/default-female.jpg')}}" class="img-thumbnail shadow-sm">
                                             @endif
                                         @else
-                                        <img src="{{asset('storage/'.Auth::user()->image)}}" alt="John Doe" />
+                                        <img src="{{asset('storage/'.$account->image)}}" alt="John Doe" />
                                         @endif
 
-                                        <div class="mt-3">
+                                        {{-- <div class="mt-3">
                                             <input type="file" name="image" id="" class="form-control @error('image')is-invalid @enderror">
-                                        </div>
+                                        </div> --}}
                                         <div class="mt-3">
                                         <button class="btn bg-dark text-white col-12" type="submit">
                                             Update
@@ -44,47 +49,40 @@
 
                         <div class="form-group">
                             <label  class="control-label mb-1">Name</label>
-                            <input id="cc-pament" name="name" type="text" value="{{old('name',Auth::user()->name)}}" class="form-control @error('name')is-invalid @enderror"  aria-required="true" aria-invalid="false" placeholder="Enter name"/>
-                            @error('name')
-                                     <div class="invalid-feedback">{{$message}}</div>
-                                 @enderror 
+                            <input  disabled id="cc-pament" name="name" type="text" value="{{old('name',$account->name)}}" class="form-control @error('name')is-invalid @enderror"  aria-required="true" aria-invalid="false" placeholder="Enter name"/>
+                            
                         </div>
                         <div class="form-group">
                             <label  class="control-label mb-1">Email</label>
-                            <input id="cc-pament" name="email" type="email" value="{{old('email',Auth::user()->email)}}" class="form-control @error('email') is-invalid @enderror"  aria-required="true" aria-invalid="false" placeholder="Enter email"/>
-                            @error('email')
-                            <div class="invalid-feedback">{{$message}}</div>
-                        @enderror 
+                            <input disabled  id="cc-pament" name="email" type="email" value="{{old('email',$account->email)}}" class="form-control @error('email') is-invalid @enderror"  aria-required="true" aria-invalid="false" placeholder="Enter email"/>
+                           
                         </div>
                          <div class="form-group">
                             <label  class="control-label mb-1">Phone</label>
-                            <input id="cc-pament" name="phone" type="text" value="{{old('phone',Auth::user()->phone)}} " class="form-control @error('phone') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Enter name"/>
-                            @error('phone')
-                            <div class="invalid-feedback">{{$message}}</div>
-                        @enderror 
+                            <input  disabled id="cc-pament" name="phone" type="text" value="{{old('phone',$account->phone)}} " class="form-control @error('phone') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Enter name"/>
+                          
                         </div>
                        <div class="form-group">
                         <label  class="control-label mb-1">Gender</label>
-                        <select name="gender" id="" class="form-control">
+                        <select  disabled name="gender" id="" class="form-control">
                             <option>Choose Gender..</option>
-                            <option value="male" @if(Auth::user()->gender=='male') selected @endif >Male</option>
-                            <option value="female" @if(Auth::user()->gender=='female') selected @endif  >Female</option>
+                            <option value="male" @if($account->gender=='male') selected @endif >Male</option>
+                            <option value="female" @if($account->gender=='female') selected @endif  >Female</option>
                         </select>
-                        @error('gender')
-                        <div class="invalid-feedback">{{$message}}</div>
-                    @enderror 
+                        
                    </div>
                    <div class="form-group">
                         <label  class="control-label mb-1">Address</label>
-                        <textarea name="address" placeholder="Enter Address" cols="30 " rows="10" class="form-control @error('address') is-invalid @enderror"> {{old('address',Auth::user()->address)}}</textarea>
+                        <textarea  disabled name="address" placeholder="Enter Address" cols="30 " rows="10" class="form-control @error('address') is-invalid @enderror"> {{old('address',$account->address)}}</textarea>
                 
-                        @error('address')
-                        <div class="invalid-feedback">{{$message}}</div>
-                    @enderror 
+                       
                     </div>
                 <div class="form-group">
                     <label  class="control-label mb-1">Role</label>
-                    <input id="cc-pament" name="role" type="text" value="{{old('role',Auth::user()->role)}}" class="form-control @error('role') is-invalid @enderror"   aria-required="true" aria-invalid="false" disabled/>
+                    <select id="cc-pament" name="role"  class="form-control @error('role') is-invalid @enderror"   aria-required="true" aria-invalid="false" >
+                    <option value="admin" @if($account->role =='admin') selected  @endif>Admin</option>
+                    <option value="user"  @if($account->role =='user') selected  @endif>User</option>
+                    </select>
                </div>
                         </div>
                         </div>

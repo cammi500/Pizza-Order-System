@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +44,9 @@ class ProductController extends Controller
     }
     // edit pizza
     public function edit($id){
-        $pizza =Product::where( 'id',$id)->first();
+        $pizza =Product::select('products.*','categories.name as category_name')
+        ->leftJoin('categories','products.category_id','categories.id')
+        ->where('products.id',$id)->first();
         return view('admin.product.edit',compact('pizza'));
     }
     // update
@@ -82,6 +85,8 @@ class ProductController extends Controller
         Product::where('id',$id)->delete();
         return redirect()->route('product#list')->with(['deleteSuccess'=>'Pizza delete Success']);
     }
+
+   
     // request product info check
     private function requestProductInfo($request){
         return [

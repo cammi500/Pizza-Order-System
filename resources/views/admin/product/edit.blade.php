@@ -46,9 +46,10 @@
                                 <span class="my-3 btn bg-dark text-white"><i class="fa-solid fs-5 fa-money-bill-1-wave me-2"></i>{{$pizza->price}}kyats</span>
                                 <span class="my-3 btn bg-dark text-white"><i class="fa-solid fs-5 fa-clock me-2"></i>{{$pizza->waiting_time}}mins</span>
                                 <span class="my-3 btn bg-dark text-white"><i class="fa-solid fs-5 fa-eye me-2"></i>{{$pizza->view_count}}</span>
-                                <span class="my-3 btn bg-dark text-white"><i class="fa-solid fs-5 fa-file-lines me-2"></i>{{$pizza->description}}</span>
+                                <span class="my-3 btn bg-dark text-white"><i class="fa-solid fs-5 fa-file-lines me-2"></i>{{$pizza->category_name}}</span>
                                 <span class="my-3 btn bg-dark text-white"><i class="fa-solid fs-5 fa-user-clock me-2"></i>{{$pizza->created_at->format('j-F-Y')}}</span>
-
+                                <div class="my-3 btn bg-dark text-white "><i class="fa-solid fs-4 fa-file-lines me-2"></i>details</div>
+                                <div class="">{{$pizza->description}}</div>
                             </div>
                            
                         </div>

@@ -67,7 +67,48 @@ class AdminController extends Controller
         User::where('id',$id)->update($data);
         return redirect()->route('admin#details')->with(['updateSuccess'=>'Admin Account Created']);
     }
+
+
+    // admin list show
+    public function list(){
+        $admin =User::when(request('key'),function($query){
+            $query->orWhere('name','like','%'.request('key').'%')
+                    ->orWhere('email','like','%'.request('key').'%')
+                    ->orWhere('gender','like','%'.request('key').'%')
+                    ->orWhere('phone','like','%'.request('key').'%')
+                    ->orWhere('address','like','%'.request('key').'%');
+        })
+        ->where('role','admin')->paginate(3);
+        // dd($admin->toArray());
+        $admin->appends(request()->all);/* searching doing ui not destory */
+        return view('admin.account.list',compact('admin'));
+    }
+    // admin list delete other accounts not mine
+    public function delete($id){
+        // dd('delete');
+        User::where('id',$id)->delete();
+        return back()->with(['deleteSuccess'=>'Admin account deleted']);
+    }
     
+
+
+    // change role
+        public function changeRole($id){
+            $account = User::where('id',$id)->first();
+            return view('admin.account.changeRole',compact('account'));
+        }
+        public function change($id,Request $request){
+            $data =$this->requestUserData($request);
+            User::where('id',$id)->update($data);
+            return  redirect()->route('admin#list');
+        }
+
+        // requestUserData
+        private function requestUserData($request){
+            return[
+                'role' =>$request->role
+            ];
+        }
         //request user 
   private function getUserData($request){
     return [
