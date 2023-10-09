@@ -68,7 +68,7 @@
     <script src="{{asset('admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
     </script>
     <script src="{{asset('admin/vendor/counter-up/jquery.waypoints.min.js')}}"></script>
-    </script>
+  
     <script src="{{asset('admin/vendor/circle-progress/circle-progress.min.js')}}"></script>
     <script src="{{asset('admin/vendor/counter-up/jquery.counterup.min.js')}}">
     <script src="{{asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>

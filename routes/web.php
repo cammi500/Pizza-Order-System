@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\user\AjaxController;
+use App\Http\Controllers\user\UserController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Whoops\Run;
 
@@ -81,10 +84,24 @@ Route::middleware(['auth'])->group(function () {
     //users routes
     //home
     Route::group(['prefix'=>'user','middleware' =>'user_auth'],function(){
-        Route::get('home',function(){
-            return view('user.home');
-        })->name('user#home') ;
-   
+        Route::get('/homePage',[UserController::class,'home'])->name('user#home');
+
+
+        Route::prefix('password')->group(function(){
+            Route::get('change',[UserController::class,'changePasswordPage'])->name('user#changePasswordPage');
+            Route::post('change',[UserController::class,'changePassword'])->name('user#changePassword');
+        });
+
+        
+        Route::prefix('account')->group(function(){
+            Route::get('change',[UserController::class,'accountChangePage'])->name('user#accountChangePage');
+            Route::post('change/{id}',[UserController::class,'accountChange'])->name('user#accountChange');
+
+        });
+
+        Route::prefix('ajax')->group(function(){
+             Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
+            });
+        });
 });
-});
-// adminadmin
+
