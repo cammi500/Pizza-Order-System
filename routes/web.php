@@ -85,7 +85,12 @@ Route::middleware(['auth'])->group(function () {
     //home
     Route::group(['prefix'=>'user','middleware' =>'user_auth'],function(){
         Route::get('/homePage',[UserController::class,'home'])->name('user#home');
+        Route::get('/filter/{id}',[UserController::class,'filter'])->name('user#filter');
+        
 
+        Route::prefix('pizza')->group(function(){
+            Route::get('details/{id}',[UserController::class,'pizzaDetails'])->name('user#PizzaDetails');
+        });
 
         Route::prefix('password')->group(function(){
             Route::get('change',[UserController::class,'changePasswordPage'])->name('user#changePasswordPage');

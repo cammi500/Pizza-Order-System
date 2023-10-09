@@ -44,7 +44,13 @@ class UserController extends Controller
         }
         return back()->with(['notMatch'=>'old password not Match.Try Again']);
     }
-
+    // filer category
+    public function filter($categoryId){
+        // dd($categoryId);
+        $pizza = Product::where('category_id',$categoryId)->orderBy('created_at','desc')->get();
+        $category = Category::get();
+        return view('user.main.home',compact('pizza','category'));
+    }
     // account change
     public function accountChangePage(){
         return view('user.profile.account');
@@ -69,7 +75,13 @@ class UserController extends Controller
         return back()->with(['updateSuccess'=>'Admin Account Created']);
         // return view('user.profile.account');
     }
-        
+        // direct pizza details
+        public function pizzaDetails($pizzaId){
+            $pizza = Product::where('Id',$pizzaId)->first();
+            $pizzaList =Product::get();
+            return view('user.main.detail',compact('pizza','pizzaList'));
+        } 
+
      //request user 
   private function getUserData($request){
     return [
