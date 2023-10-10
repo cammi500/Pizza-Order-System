@@ -90,6 +90,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('pizza')->group(function(){
             Route::get('details/{id}',[UserController::class,'pizzaDetails'])->name('user#PizzaDetails');
+           
+        });
+        Route::prefix('cart')->group(function(){
+            Route::get('cartList',[UserController::class,'cartList'])->name('user#cartList');
+           
         });
 
         Route::prefix('password')->group(function(){
@@ -106,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('ajax')->group(function(){
              Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
+             Route::get('/addToCart',[AjaxController::class,'addToCart'])->name('ajax#addToCart');
             });
         });
 });

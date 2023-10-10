@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -18,7 +19,8 @@ class UserController extends Controller
     public function home(){
         $pizza = Product::orderBy('created_at','desc')->get();
         $category = Category::get();
-        return view('user.main.home',compact('pizza','category'));
+        $cart = Cart::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('pizza','category','cart'));
     }
     // change Password page
     public function changePasswordPage(){
@@ -81,6 +83,20 @@ class UserController extends Controller
             $pizzaList =Product::get();
             return view('user.main.detail',compact('pizza','pizzaList'));
         } 
+
+        public function cartList(){
+            $cartList = Cart::select('carts.*','products.name as pizza_name','products.price as pizza_price')  
+                            ->leftJoin('products','products.id','carts.product_id')
+                            ->where('carts.user_id',Auth::user()->id)
+                            ->get();
+            // dd($cartList->toArray());
+            $totalPrice =0;
+            foreach($cartList as $c){
+                $totalPrice += $c->pizza_price * $c->qty;
+            }
+
+            return view('user.main.cart',compact('cartList','totalPrice'));
+        }
 
      //request user 
   private function getUserData($request){
