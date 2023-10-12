@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
@@ -20,7 +21,8 @@ class UserController extends Controller
         $pizza = Product::orderBy('created_at','desc')->get();
         $category = Category::get();
         $cart = Cart::where('user_id',Auth::user()->id)->get();
-        return view('user.main.home',compact('pizza','category','cart'));
+        $history = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('pizza','category','cart','history'));
     }
     // change Password page
     public function changePasswordPage(){
@@ -51,7 +53,14 @@ class UserController extends Controller
         // dd($categoryId);
         $pizza = Product::where('category_id',$categoryId)->orderBy('created_at','desc')->get();
         $category = Category::get();
-        return view('user.main.home',compact('pizza','category'));
+        $cart = Cart::where('user_id',Auth::user()->id)->get();
+        $history = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('pizza','category','cart','history'));
+    }
+    //history
+    public function history(){
+        $order =Order::where('user_id',Auth::user()->id)->orderBy('created_at', 'desc')->paginate('3');
+        return view('user.main.history',compact('order'));
     }
     // account change
     public function accountChangePage(){
@@ -85,7 +94,7 @@ class UserController extends Controller
         } 
 
         public function cartList(){
-            $cartList = Cart::select('carts.*','products.name as pizza_name','products.price as pizza_price')  
+            $cartList = Cart::select('carts.*','products.name as pizza_name','products.price as pizza_price','products.image as product_image')  
                             ->leftJoin('products','products.id','carts.product_id')
                             ->where('carts.user_id',Auth::user()->id)
                             ->get();

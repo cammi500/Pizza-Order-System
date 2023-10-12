@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    {{-- <link href="img/favicon.ico" rel="icon"> --}}
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -225,9 +225,9 @@
                     <a class="text-primary" href="">Thiri Aung</a>
                 </p>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
+            {{-- <div class="col-md-6 px-xl-0 text-center text-md-right">
                 <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Footer End -->
@@ -244,8 +244,8 @@
     <script src="{{asset('admin/user/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
     <!-- Contact Javascript File -->
-    <script src="{{asset('admin/user/mail/jqBootstrapValidation.min.js') }}"></script>
-    <script src="{{asset('admin/user/mail/contact.js') }}"></script>
+    {{-- <script src="{{asset('admin/user/mail/jqBootstrapValidation.min.js') }}"></script>
+    <script src="{{asset('admin/user/mail/contact.js') }}"></script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Template Javascript -->

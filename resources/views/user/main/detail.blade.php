@@ -127,9 +127,6 @@
     <script>
         $(document).ready(function(){
             $('#addCartBtn').click(function(){
-
-               
-
                 $source = {
                     'userId' : $('#userId').val(),
                     'pizzaId' : $('#pizzaId').val(),
