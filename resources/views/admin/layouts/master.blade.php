@@ -61,6 +61,10 @@
                             <a href="{{route('product#list')}}">
                                 <i class="fa-solid fa-pizza-slice"></i>Product</a>
                         </li>
+                        <li>
+                            <a href="{{route('order#list')}}">
+                                <i class="fa-solid fa-pizza-slice"></i>Order</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -224,20 +228,22 @@
        <script src="{{asset('admin/vendor/wow/wow.min.js')}}"></script>
        <script src="{{asset('admin/vendor/animsition/animsition.min.js')}}"></script>
        <script src="{{asset('admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
-       </script>
+         </script>
        <script src="{{asset('admin/vendor/counter-up/jquery.waypoints.min.js')}}"></script>
-       </script>
+       {{-- <script src="{{asset('admin/vendor/counter-up/jquery.counterup.min.js')}}">
+    </script> --}}
        <script src="{{asset('admin/vendor/circle-progress/circle-progress.min.js')}}"></script>
        <script src="{{asset('admin/vendor/counter-up/jquery.counterup.min.js')}}">
+       </script>
        <script src="{{asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
        <script src="{{asset('admin/vendor/chartjs/Chart.bundle.min.js')}}"></script>
        <script src="{{asset('admin/vendor/select2/select2.min.js')}}">
-       </script>
+        </script>
    
-       <!-- Main JS-->
+
        <script src="{{asset('admin/js/main.js')}}"></script>
-   
-   </body>
-   
-   </html>
-//    end document
+   {{-- jquery cdn --}}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </body>
+ @yield('scriptSource')
+</html>
