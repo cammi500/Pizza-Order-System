@@ -93,8 +93,9 @@
                         </thead>
                         <tbody id="dataList">
                          @foreach ($order as $o)
+                        
                          <tr class="tr-shadow">
-                           
+                            <input type="hidden" name="" class="orderId" value="{{$o->id}}">
                             <td >
                                 {{$o->user_id}}
                             </td>
@@ -107,11 +108,11 @@
                             <td >
                                {{$o->order_code}}
                             </td>
-                            <td >
+                            <td class="amount">
                                 {{$o->total_price}}kyats
                              </td>
                              <td >
-                           <select name="status" class="form-control">
+                           <select name="status" class="form-control statusChange">
                             <option value="0" @if ($o->status ==0)  selected @endif>Pending</option>
                             <option value="1" @if ($o->status ==1)  selected @endif>Accept</option>
                             <option value="2" @if ($o->status ==2)  selected @endif>Reject</option>
@@ -126,10 +127,10 @@
                     {{-- <div class="mt-3">
                         {{$order->links()}}
                     </div> --}}
-                   {{-- @else
+                    {{-- @else
                 </div>
                   <h3 class="text-secondary text-center mt-5">Their is no pizza</h3>
-                  @endif --}}
+                  @endif  --}}
                 <!-- END DATA TABLE -->
             </div>
         </div>
@@ -166,7 +167,7 @@
                 //    status
                 if(response[$i].status == 0){
                     $statusMessage = `
-                    <select name="status" class="form-control">
+                    <select name="status" class="form-control statusChange">
                            <option value="0" selected>Pending</option>
                            <option value="1"  >Accept</option>
                            <option value="2" >Reject</option>
@@ -174,15 +175,16 @@
                     `;
                 }else if(response[$i].status == 1){
                     $statusMessage = `
-                    <select name="status" class="form-control">
+                    <select name="status" class="form-control statusChange">
                            <option value="0" >Pending</option>
                            <option value="1" selected >Accept</option>
                            <option value="2" >Reject</option>
                           </select>
                     `;
                 }else if(response[$i].status == 2){
+                    
                     $statusMessage = `
-                    <select name="status" class="form-control">
+                    <select name="status" class="form-control statusChange">
                            <option value="0" >Pending</option>
                            <option value="1"  >Accept</option>
                            <option value="2"selected >Reject</option>
@@ -191,12 +193,12 @@
                 }
                     $list += `
                     <tr class="tr-shadow">
-                           
+                        <input type="hidden" name="" class="orderId" value=" ${response[$i].id}">
                            <td >
                                ${response[$i].user_id}
                            </td>
                            <td >
-                               ${response[$i].user_name}
+                               ${response[$i].user_name} || ${response[$i].id}
                            </td>
                            <td >
                                ${$finalDate}
@@ -219,6 +221,30 @@
                 }
             })
 
+        })
+
+        //change status of db
+        $('.statusChange').change(function (){
+          $currentStatus = $(this).val();//val 
+        //   console.log($currentStatus);
+            $parentNode =$(this).parents('tr');
+            $orderId = $parentNode.find('.orderId').val();//data number
+            // console.log($orderId);
+            $data = {
+                'orderId' :$orderId,
+                'status' :$currentStatus
+                
+
+            };
+            console.log($data);
+            $.ajax({
+                type :'get',
+                url :'http://127.0.0.1:8000/order/ajax/change/status',
+                data : $data,
+                dataType : 'json',
+                
+            })
+            // window.location.href = 'http://127.0.0.1:8000/order/orderList';
         })
     })
 </script>
