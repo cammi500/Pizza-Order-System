@@ -65,6 +65,10 @@
                             <a href="{{route('order#list')}}">
                                 <i class="fa-solid fa-pizza-slice"></i>Order</a>
                         </li>
+                        <li>
+                            <a href="{{route('admin#userList')}}">
+                                <i class="fa-solid fa-user"></i>User List</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

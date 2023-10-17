@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="col-md-12">
                 <!-- DATA TABLE -->
-                <div class="table-data__tool">
+                {{-- <div class="table-data__tool">
                     <div class="table-data__tool-left">
                         <div class="overview-wrap">
                             <h2 class="title-1">Category List</h2>
@@ -24,7 +24,7 @@
                             CSV download
                         </button>  
                     </div>
-                </div>
+                </div> --}}
 
                 @if (Session('deleteSuccess'))
                 <div class="col-3 offset-9">

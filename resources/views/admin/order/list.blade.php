@@ -54,7 +54,7 @@
                                 {{$o->created_at->format('F-j-Y')}}
                             </td>
                             <td >
-                               {{$o->order_code}}
+                               <a href="{{route('admin#listInfo',$o->order_code)}}" >{{$o->order_code}}
                             </td>
                             <td class="amount">
                                 {{$o->total_price}}kyats

@@ -1,16 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\user\AjaxController;
 use App\Http\Controllers\user\UserController;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
-use Whoops\Run;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,13 +77,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('updatePage/{id}',[ProductController::class,'updatePage'])->name('product#updatePage');
         Route::post('update',[ProductController::class,'update'])->name('product#update');
     });
-//orders
+    //orders product
     Route::prefix('order')->group(function(){
             Route::get('orderList',[OrderController::class,'orderList'])->name('order#list');
             Route::get('change/status',[OrderController::class,'changeStatus'])->name('admin#changeStatus');
             Route::get('ajax/change/status',[OrderController::class,'ajaxChangeStatus'])->name('admin#ajaxChangeStatus');
-    });
-
+            Route::get('listInfo/{orderCode}',[OrderController::class,'listInfo'])->name('admin#listInfo');
+        });
+        //user
+        Route::prefix('user')->group(function(){
+            Route::get('list',[UserController::class,'userList'])->name('admin#userList');
+        });
       });
       
     

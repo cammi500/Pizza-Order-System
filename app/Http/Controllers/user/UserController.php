@@ -107,6 +107,15 @@ class UserController extends Controller
             return view('user.main.cart',compact('cartList','totalPrice'));
         }
 
+// user list in admin adshboard
+        public function userList(){
+            $users =User::where('role','user')->get();
+            return view('admin.user.list',compact('users',));
+        }
+
+
+
+
      //request user 
   private function getUserData($request){
     return [

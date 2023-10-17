@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderList;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,7 +17,7 @@ class OrderController extends Controller
         // dd($order->toArray());
         return view('admin.order.list',compact('order'));
     }
-    //sort with ajax
+    //click the btn of search
     public function changeStatus(Request $request){
         // dd($request->all());
         // logger($request->all());
@@ -34,6 +35,21 @@ class OrderController extends Controller
        
         return view('admin.order.list',compact('order'));
     }
+
+    //for order code
+    public function listInfo($orderCode){
+        $order = Order::where('order_code',$orderCode)->first();
+        // dd($orderCode);
+        $orderList =OrderList::select('order_lists.*','users.name as user_name','products.image as product_image','products.name as product_name')
+        ->leftJoin('users','users.id','order_lists.user_id')
+        ->leftJoin('products','products.id','order_lists.product_id')
+        ->where('order_code',$orderCode)
+        ->get();
+//    dd($orderList->toArray());
+        return view('admin.order.orderList',compact('orderList','order'));
+    }
+
+
     //ajax change status
     public function ajaxChangeStatus(Request $request){
         // logger($request->all());
