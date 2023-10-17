@@ -6,78 +6,26 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="col-md-12">
-                <!-- DATA TABLE -->
-                <div class="table-data__tool">
-                    <div class="table-data__tool-left">
-                        <div class="overview-wrap">
-                            <h2 class="title-1">Product List</h2>
-
-                        </div>
-                    </div>
-                    <div class="table-data__tool-right">
-                        <a href="">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="fa-solid fa-user"> </i>Add Product
-                            </button>  
-                        </a>
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                            CSV download
-                        </button>  
-                    </div>
-                </div>
-
-                {{-- @if (Session('categorySuccess'))
-                <div class="col-3 offset-9">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ Session('categorySuccess') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif --}}
-
-                @if (Session('deleteSuccess'))
-                <div class="col-3 offset-9">
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        {{ Session('deleteSuccess') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                      </div>
-                </div>
-                @endif
-
-                <div class="row">
-                    <div class="col-3">
-                        <h4 class="text-secondary" >Search key: <span class="btn-danger">{{request('key')}}</span></h4>
-                    </div>
-                    <div class="col-3 offset-6">
-                        <form method="get" action="{{route('order#list')}}">
-                            @csrf
-                            <div class="d-flex">
-                                <input type="text" name="key"  class="form-control"  placeholder="search..." value="{{request('key')}}">
-                            <button  class="btn bg-dark text-white" type="submit">
-                                <i class="zmdi zmdi-mail-send"></i>
-                            </button>
-                            </div>
-                        </form>
-                       </div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-2 bg-white shadow-sm p-2 my-2 text-center">
-                        <h4>Total-{{$order->count()}}</h4>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <label for=""  class="mt-2 me-4">Order Status</label>
-                        <select id="orderStatus" name="status" class="form-control col-2">
+           
+                <form action="{{route('admin#changeStatus')}}" method="get">
+                    @csrf
+                    <div class="input-group mb-3">
+                   <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-database mr-2"></i>{{count($order)}}
+                    </span>
+                   </div>
+                        <select name="orderStatus" class="custom-select form-control col-2">
                             <option value="">All</option>
-                            <option value="0">Pending</option>
-                            <option value="1">Accept</option>
-                            <option value="2">Reject</option>
+                            <option value="0" @if(request('orderStatus') =='0') selected @endif >Pending</option>
+                            <option value="1" @if(request('orderStatus') == '1')  selected @endif >Accept</option>
+                            <option value="2" @if(request('orderStatus') == '2')  selected @endif >Reject</option>
                         </select>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-sm bg-dark ms-3 text-white input-group-text"><i class="fa-solid fa-magnifying-glass me-2"></i> Search</button>
+                        </div>
                 </div>
+                </form>
                 {{-- @if (count($pizzas)!=0) --}}
                     <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2 text-center">
@@ -140,88 +88,90 @@
 
 @section('scriptSource')
 <script>
-    $(document).ready(function(){
+
+    
+    // $(document).ready(function(){
       
-        $('#orderStatus').change(function(){
-            $status =$('#orderStatus').val();
-            // console.log($status);
+    //     $('#orderStatus').change(function(){
+    //         $status =$('#orderStatus').val();
+    //         // console.log($status);
 
-            $.ajax({
-                type:'get',
-                url: 'http://127.0.0.1:8000/order/ajax/status',
-                data : {
-                    'status': $status
-                },
-                dataType : 'json',
-                success : function(response){
-                    //append
-                   $list ='';
-                   for($i=0;$i<response.length;$i++){
+    //         $.ajax({
+    //             type:'get',
+    //             url: 'http://127.0.0.1:8000/order/ajax/status',
+    //             data : {
+    //                 'status': $status
+    //             },
+    //             dataType : 'json',
+    //             success : function(response){
+    //                 //append
+    //                $list ='';
+    //                for($i=0;$i<response.length;$i++){
 
 
-                    //sep-6-2022
-                    $months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-                   $dbDate =new Date(response[$i].created_at);
-                   $finalDate =$months[$dbDate.getMonth()]+"-"+$dbDate.getDate()+"-"+$dbDate.getFullYear();
+    //                 //sep-6-2022
+    //                 $months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    //                $dbDate =new Date(response[$i].created_at);
+    //                $finalDate =$months[$dbDate.getMonth()]+"-"+$dbDate.getDate()+"-"+$dbDate.getFullYear();
 
-                //    status
-                if(response[$i].status == 0){
-                    $statusMessage = `
-                    <select name="status" class="form-control statusChange">
-                           <option value="0" selected>Pending</option>
-                           <option value="1"  >Accept</option>
-                           <option value="2" >Reject</option>
-                          </select>
-                    `;
-                }else if(response[$i].status == 1){
-                    $statusMessage = `
-                    <select name="status" class="form-control statusChange">
-                           <option value="0" >Pending</option>
-                           <option value="1" selected >Accept</option>
-                           <option value="2" >Reject</option>
-                          </select>
-                    `;
-                }else if(response[$i].status == 2){
+    //             //    status
+    //             if(response[$i].status == 0){
+    //                 $statusMessage = `
+    //                 <select name="status" class="form-control statusChange">
+    //                        <option value="0" selected>Pending</option>
+    //                        <option value="1"  >Accept</option>
+    //                        <option value="2" >Reject</option>
+    //                       </select>
+    //                 `;
+    //             }else if(response[$i].status == 1){
+    //                 $statusMessage = `
+    //                 <select name="status" class="form-control statusChange">
+    //                        <option value="0" >Pending</option>
+    //                        <option value="1" selected >Accept</option>
+    //                        <option value="2" >Reject</option>
+    //                       </select>
+    //                 `;
+    //             }else if(response[$i].status == 2){
                     
-                    $statusMessage = `
-                    <select name="status" class="form-control statusChange">
-                           <option value="0" >Pending</option>
-                           <option value="1"  >Accept</option>
-                           <option value="2"selected >Reject</option>
-                          </select>
-                    `;
-                }
-                    $list += `
-                    <tr class="tr-shadow">
-                        <input type="hidden" name="" class="orderId" value=" ${response[$i].id}">
-                           <td >
-                               ${response[$i].user_id}
-                           </td>
-                           <td >
-                               ${response[$i].user_name} || ${response[$i].id}
-                           </td>
-                           <td >
-                               ${$finalDate}
-                           </td>
-                           <td >
-                              ${response[$i].order_code}
-                           </td>
-                           <td >
-                               ${response[$i].total_price}kyats
-                            </td>
-                            <td >
-                                ${$statusMessage}
-                            </td>
-                               </div>
-                           </td>
-                        </tr>
-                    `;
-                   }
-                   $('#dataList').html($list);
-                }
-            })
+    //                 $statusMessage = `
+    //                 <select name="status" class="form-control statusChange">
+    //                        <option value="0" >Pending</option>
+    //                        <option value="1"  >Accept</option>
+    //                        <option value="2"selected >Reject</option>
+    //                       </select>
+    //                 `;
+    //             }
+    //                 $list += `
+    //                 <tr class="tr-shadow">
+    //                     <input type="hidden" name="" class="orderId" value=" ${response[$i].id}">
+    //                        <td >
+    //                            ${response[$i].user_id}
+    //                        </td>
+    //                        <td >
+    //                            ${response[$i].user_name} || ${response[$i].id}
+    //                        </td>
+    //                        <td >
+    //                            ${$finalDate}
+    //                        </td>
+    //                        <td >
+    //                           ${response[$i].order_code}
+    //                        </td>
+    //                        <td >
+    //                            ${response[$i].total_price}kyats
+    //                         </td>
+    //                         <td >
+    //                             ${$statusMessage}
+    //                         </td>
+    //                            </div>
+    //                        </td>
+    //                     </tr>
+    //                 `;
+    //                }
+    //                $('#dataList').html($list);
+    //             }
+    //         })
 
-        })
+    //     })
 
         //change status of db
         $('.statusChange').change(function (){
@@ -236,7 +186,7 @@
                 
 
             };
-            console.log($data);
+            // console.log($data);
             $.ajax({
                 type :'get',
                 url :'http://127.0.0.1:8000/order/ajax/change/status',
@@ -246,6 +196,6 @@
             })
             // window.location.href = 'http://127.0.0.1:8000/order/orderList';
         })
-    })
+  
 </script>
 @endsection

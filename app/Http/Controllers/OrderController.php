@@ -17,7 +17,8 @@ class OrderController extends Controller
         return view('admin.order.list',compact('order'));
     }
     //sort with ajax
-    public function ajaxStatus(Request $request){
+    public function changeStatus(Request $request){
+        // dd($request->all());
         // logger($request->all());
         // $request->status = $request->status ==null ? "" : $request->status;
         $order = Order::select('orders.*','users.name as user_name')
@@ -25,13 +26,13 @@ class OrderController extends Controller
         // ->where('orders.status',$request->status)
         ->orderBy('created_at','desc');
         //query dividend
-        if($request->status == null){
+        if($request->orderStatus == null){
             $order = $order->get();
         }else{
-            $order = $order->where('orders.status',$request->status)->get();
+            $order = $order->where('orders.status',$request->orderStatus)->get();
         }
        
-        return response()->json($order,200);
+        return view('admin.order.list',compact('order'));
     }
     //ajax change status
     public function ajaxChangeStatus(Request $request){
