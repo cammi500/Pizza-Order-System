@@ -109,10 +109,17 @@ class UserController extends Controller
 
 // user list in admin adshboard
         public function userList(){
-            $users =User::where('role','user')->get();
-            return view('admin.user.list',compact('users',));
+            $users =User::where('role','user')->paginate('3');
+            return view('admin.user.list',compact('users'));
         }
-
+//change user role
+        public function userChangeRole(Request $request){
+            // logger($request->all());
+            $updateSource =[
+                'role' =>$request->role
+            ];
+            User::where('id',$request->userId)->update($updateSource);
+        }
 
 
 

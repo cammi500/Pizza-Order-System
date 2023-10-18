@@ -90,7 +90,7 @@
 <script>
 
     
-    // $(document).ready(function(){
+    $(document).ready(function(){
       
     //     $('#orderStatus').change(function(){
     //         $status =$('#orderStatus').val();
@@ -196,6 +196,6 @@
             })
             // window.location.href = 'http://127.0.0.1:8000/order/orderList';
         })
-  
+    })
 </script>
 @endsection

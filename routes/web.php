@@ -63,8 +63,8 @@ Route::middleware(['auth'])->group(function () {
         // admin list
         Route::get('list',[AdminController::class,'list'])->name('admin#list');
         Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin#delete');
-        Route::get('changeRole/{id}',[AdminController::class,'changeRole'])->name('admin#changeRole');
-        Route::post('change/role/{id}',[AdminController::class,'change'])->name('admin#change');
+        Route::get('changeRole',[AdminController::class,'changeRole'])->name('admin#changeRole');
+        //  Route::post('change/role/{id}',[AdminController::class,'ajaxChangeRole'])->name('admin#ajaxChangeRole');
     });
 
     // products
@@ -87,6 +87,7 @@ Route::middleware(['auth'])->group(function () {
         //user
         Route::prefix('user')->group(function(){
             Route::get('list',[UserController::class,'userList'])->name('admin#userList');
+            Route::get('change/role',[UserController::class,'userChangeRole'])->name('admin#userChangeRole');
         });
       });
       

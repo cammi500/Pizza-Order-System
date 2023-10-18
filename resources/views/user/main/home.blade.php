@@ -108,7 +108,6 @@
                            </p>
                        @endif
                        </span>
-                   
                 </div>
             </div>
             <!-- Shop Product End -->

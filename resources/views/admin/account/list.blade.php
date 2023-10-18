@@ -55,7 +55,7 @@
                 </div>
                 <div class="row my-2">
                     <div class="col-2 bg-white shadow-sm p-2 my-2 text-center">
-                        <h4>Total-{{$admin->total()}}</h4>
+                        <h4>Total-{{$admins->total()}}</h4>
                     </div>
                 </div>
               
@@ -70,7 +70,7 @@
                                 <th>Email</th>
                                 <th>Gender</th>
                                 <th>Phone</th>
-                                <th>Address</th>
+                                {{-- <th>Address</th> --}}
                                 <th>
 
                                 </th>
@@ -78,50 +78,60 @@
                         </thead>
                          <tbody>
                             
-                            @foreach ($admin as $a)
+                            @foreach ($admins as $admin)
                                 <tr class="tr-shadow">
                                     <td class="col-2">
-                                        @if ($a->image == null)
+                                        @if ($admin->image == null)
                                             {{-- <img src="{{asset('image/default-user.jpg')}}" class="img-thumbnail shadow-sm"> --}}
-                                            @if ($a->gender == 'male')
+                                            @if ($admin->gender == 'male')
                                             <img src="{{asset('image/default-user.jpg')}}" class="img-thumbnail shadow-sm">
                                             @else
                                             <img src="{{asset('image/default-female.jpg')}}" class="img-thumbnail shadow-sm">
                                             @endif
                                         @else
-                                            <img src="{{asset('storage/'.$a->image)}}" class="img-thumbnail shadow-sm" >        
+                                            <img src="{{asset('storage/'.$admin->image)}}" class="img-thumbnail shadow-sm" >        
                                              @endif
                                     </td>
+                                    <input type="hidden" id="adminId" value="{{$admin->id}}">
                                     <td class="col-5">
-                                        {{$a->name}}
+                                        {{$admin->name}}
                                     </td>
                                     <td>
-                                        {{$a->email}}
+                                        {{$admin->email}}
                                     </td>
                                     <td>
-                                        {{$a->gender}}
+                                        {{$admin->gender}}
                                     </td>
                                     <td>
-                                        {{$a->phone}}
+                                        {{$admin->phone}}
                                     </td>
-                                    <td>
-                                        {{$a->address}}
-                                    </td>
+                                    {{-- <td>
+                                        {{$admin->address}}
+                                    </td> --}}
                                      <td>
                                         <div class="table-data-feature p-2">
-                                           @if (Auth::user()->id == $a->id)
+                                           @if (Auth::user()->id == $admin->id)
                                                
                                            @else
-                                           <a href="{{route('admin#changeRole',$a->id)}}">
+                                           {{-- <a href="{{route('admin#changeRole',$admin->id)}}">
                                             <button class="item me-1" data-toggle="tooltip" data-placement="top" title="Change Roles">
                                                 <i class="fa-solid fa-person-circle-minus"></i>
-                                            </button>
-                                        </a>
-                                        <a href="{{route('admin#delete',$a->id)}}">
-                                            <button class="item me-1" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
-                                        </a>
+                                            </button> 
+                                            </a> --}}
+                                           <div class="mr-3">
+                                                <select class="form-control statusChange">
+                                                <option value="admin" @if($admin->role =='admin') selected  @endif>Admin</option>
+                                                <option value="user"  @if($admin->role =='user') selected  @endif>User</option>
+                                                </select>
+                                            </div>
+                                        
+                                        <div class="">
+                                            <a href="{{route('admin#delete',$admin->id)}}">
+                                                <button class="item me-1" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                    <i class="zmdi zmdi-delete"></i>
+                                                </button>
+                                            </a>
+                                        </div>
                                            @endif
                                             
                                         </div>
@@ -135,7 +145,7 @@
                     {{-- paginate --}}
                     <div class="mt-3">
                         {{
-                            $admin->appends(request()->query())->links()
+                            $admins->appends(request()->query())->links()
                         }}
                     </div>
                 </div>
@@ -146,3 +156,34 @@
     </div>
 </div>
 @endsection
+
+@section('scriptSource')
+<script>
+
+    
+     $(document).ready(function(){
+        //change status of db
+        $('.statusChange').change(function (){
+          $currentStatus = $(this).val();//val 
+        //   console.log($currentStatus);
+            $parentNode =$(this).parents('tr');
+            $adminId = $parentNode.find('#adminId').val();//data number
+            // console.log($adminId);
+            $data = {
+                'adminId' :$adminId,
+                'role' :$currentStatus
+            };
+            // console.log($data);
+            $.ajax({
+                type :'get',
+                url :'http://127.0.0.1:8000/admin/changeRole',
+                data : $data,
+                dataType : 'json',
+                
+            })
+           location.reload();
+        })
+    })
+</script>
+@endsection
+

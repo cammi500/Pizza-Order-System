@@ -63,11 +63,11 @@
                         </li>
                         <li>
                             <a href="{{route('order#list')}}">
-                                <i class="fa-solid fa-pizza-slice"></i>Order</a>
+                                <i class="fa-solid fa-shop"></i>Order</a>
                         </li>
                         <li>
                             <a href="{{route('admin#userList')}}">
-                                <i class="fa-solid fa-user"></i>User List</a>
+                                <i class="fa-solid fa-users"></i>User List</a>
                         </li>
                     </ul>
                 </nav>
@@ -185,13 +185,13 @@
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="{{route('admin#list')}}">
-                                                        <i class="zmdi zmdi-account"></i>Admin List</a>
+                                                        <i class="zmdi zmdi-accounts"></i>Admin List</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="{{route('admin#changePasswordPage')}}">
-                                                        <i class="zmdi zmdi-account"></i>Change Password</a>
+                                                        <i class="fa-solid fa-key"></i>Change Password</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer my-3">

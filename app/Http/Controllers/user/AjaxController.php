@@ -26,10 +26,8 @@ class AjaxController extends Controller
 
     // return pizza list
     public function addToCart(Request $request){
-       
         $data =$this->getOrderData($request);
         Cart::create($data);
-
         $response = [
             'message' =>'Add to Cart Complete',
             'status' =>'success',

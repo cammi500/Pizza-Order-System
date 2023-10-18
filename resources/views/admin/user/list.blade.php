@@ -14,19 +14,20 @@
                         <table class="table table-data2 text-center">
                         <thead>
                             <tr>
+                              
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Gender</th>
                                 <th>Phone </th>
-                               <th>Address</th>
+                               {{-- <th>Address</th> --}}
                                 <th>Role</th>
                             </tr>
                         </thead>
                         <tbody id="dataList">
                                 @foreach ($users as $user)
-                            <>
-                                <td>
+                                
+                                <td class="col-1">
                                     @if($user->image==null)
                                     {{-- <img src="{{asset('image/default-user-image-png.png')}}" class="shadow-sm"/> --}}
                                       @if ($user->gender == 'male')
@@ -38,6 +39,7 @@
                                     <img src="{{asset('storage/'.$user->image)}}" alt="John Doe" />
                                     @endif
                                 </td>
+                                <input type="hidden" id="userId" value="{{$user->id}}">
                                 <td>
                                     {{ $user->name}}
                                 </td>
@@ -50,25 +52,55 @@
                                 <td>
                                     {{ $user->phone}}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $user->address}}
-                                </td>
+                                </td> --}}
                                 <td>
-                                    <div class="form-group">
-                                        
-                                        <select id="cc-pament" name="role"  class="form-control @error('role') is-invalid @enderror"   aria-required="true" aria-invalid="false" >
-                                        <option value="admin" @if($user->role =='admin') selected  @endif>Admin</option>
-                                        <option value="user"  @if($user->role =='user') selected  @endif>User</option>
-                                        </select>
-                                   </div>
+                                  
+                                <select class="form-control statusChange">
+                                <option value="admin" @if($user->role =='admin') selected  @endif>Admin</option>
+                                <option value="user"  @if($user->role =='user') selected  @endif>User</option>
+                                </select>
+                                  
                                 </td>
                             </tr>
                                 @endforeach
                         </tbody>
                     </table>
-                  
+                  <div class="mt-5">
+                    {{$users->links()}}
+                  </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('scriptSource')
+<script>
+
+    
+     $(document).ready(function(){
+        //change status of db
+        $('.statusChange').change(function (){
+          $currentStatus = $(this).val();//val 
+          console.log($currentStatus);
+            $parentNode =$(this).parents('tr');
+            $userId = $parentNode.find('#userId').val();//data number
+            console.log($userId);
+            $data = {
+                'userId' :$userId,
+                'role' :$currentStatus
+            };
+            // console.log($data);
+            $.ajax({
+                type :'get',
+                url :'http://127.0.0.1:8000/user/change/role',
+                data : $data,
+                dataType : 'json',
+                
+            })
+           location.reload();
+        })
+    })
+</script>
 @endsection
