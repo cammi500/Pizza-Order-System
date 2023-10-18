@@ -127,6 +127,7 @@ Route::middleware(['auth'])->group(function () {
              Route::get('/order',[AjaxController::class,'order'])->name('ajax#order');
              Route::get('/clear/cart',[AjaxController::class,'clearCart'])->name('ajax#clearCart');
              Route::get('/clear/current/product',[AjaxController::class,'clearCurrentProduct'])->name('ajax#clearCurrentProduct');
+             Route::get('increase/viewCount',[AjaxController::class,'increaseViewCount'])->name('ajax#increaseViewCount');
             });
         });
 });
