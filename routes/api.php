@@ -32,3 +32,14 @@ Route::get('product/list',[RouteController::class,'productList']);
 Route::get('category/list',[RouteController::class,'categoryList']);
 //get order
 Route::get('order/list',[RouteController::class,'orderList']);
+
+
+// post
+// create category
+Route::post('create/category',[RouteController::class,'categoryCreate']);
+//create contact
+Route::post('create/contact',[RouteController::class,'contactCreate']);
+//delete category
+Route::post('category/delete',[RouteController::class,'categoryDelete']);
+// delete category by get
+Route::get('category/delete/{id}',[RouteController::class,'Delete']);

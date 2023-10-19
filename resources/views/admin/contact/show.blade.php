@@ -10,7 +10,7 @@
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
                         <div class="overview-wrap">
-                            <h2 class="title-1">Category List</h2>
+                            <h2 class="title-1">Contact List</h2>
 
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <h4 class="text-secondary" >Search key: <span class="btn-danger">{{request('key')}}</span></h4>
                     </div>
                     <div class="col-3 offset-6">
-                        <form method="get" action="{{route('category#list')}}">
+                        <form method="get" action="{{route('admin#contact')}}">
                             @csrf
                             <div class="d-flex">
                                 <input type="text" name="key"  class="form-control"  placeholder="search..." value="{{request('key')}}">
@@ -54,7 +54,7 @@
                 </div>
                 <div class="row my-2">
                     <div class="col-2 bg-white shadow-sm p-2 my-2 text-center">
-                        <h4>Total-</h4>
+                        <h4>Total-{{$contact->total()}}</h4>
                     </div>
                 </div>
               
@@ -64,11 +64,11 @@
                     <table class="table table-data2 text-center">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Category Name</th>
-                                <th>Created Date</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
                                
-                                <th></th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,16 +76,18 @@
                             @foreach ($contact as $c)
                                 <tr class="tr-shadow">
                                     <td>
-                                        {{ $c->id}}
+                                        {{ $c->name}}
+                                    </td>
+                                    <td class="col-3">
+                                        {{$c->email}}
                                     </td>
                                     <td class="col-5">
-                                        {{$c->name}}
+                                        {{$c->message}}
+                                        
                                     </td>
                                     <td>
                                         {{$c->created_at->format('j-F-Y')}}
-                                    </td>
-                                    <td>
-                                        <div class="table-data-feature p-2">
+                                        {{-- <div class="table-data-feature p-2">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button>
@@ -104,7 +106,7 @@
                                         </a>
                                                 
                                           
-                                        </div>
+                                        </div> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -114,14 +116,14 @@
                     </table>
                     {{-- paginate  --}}
                    <div class="mt-3">
-                        {{
+                        {{-- {{
                             $contact->appends(request()->query())->links()
-                        }}
+                        }} --}}
                     </div>
                 </div>
               @else
               
-                  <h3 class="text-secondary text-center mt-5">Their is no category</h3>
+                  <h3 class="text-secondary text-center mt-5">Their is no contact</h3>
                   @endif
                 <!-- END DATA TABLE -->
             </div>  

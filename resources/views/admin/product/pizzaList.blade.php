@@ -66,7 +66,7 @@
                 </div>
                 <div class="row my-2">
                     <div class="col-2 bg-white shadow-sm p-2 my-2 text-center">
-                        <h4>Total-</h4>
+                        <h4>Total-{{$pizzas->total()}}</h4>
                     </div>
                 </div>
                 @if (count($pizzas)!=0)
@@ -135,7 +135,7 @@
                     </div>
                    @else
                 </div>
-                  <h3 class="text-secondary text-center mt-5">Their is no pizza</h3>
+                  <h3 class="text-secondary text-center mt-5">Their is no product</h3>
                   @endif
                 <!-- END DATA TABLE -->
             </div>

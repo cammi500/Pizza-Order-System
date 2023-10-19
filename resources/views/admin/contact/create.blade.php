@@ -57,10 +57,10 @@
                             </div>
                             <div class="form-group">
                                 <label  class="control-label mb-1">Message</label>
-                                <input id="cc-pament" name="mesage" type="text" 
-                                 class="form-control @error('mesage') is-invalid @enderror"  
-                                   aria-required="true" aria-invalid="false" placeholder="Enter message"/>
-                                 @error('mesage')
+                                <textarea id="cc-pament" name="message" type="text" 
+                                 class="form-control @error('message') is-invalid @enderror"  
+                                   aria-required="true" aria-invalid="false" placeholder="Enter message"></textarea>
+                                 @error('message')
                                      <div class="invalid-feedback">{{$message}}</div>
                                  @enderror 
                             </div>

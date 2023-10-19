@@ -10,7 +10,11 @@ class ContactController extends Controller
 {
     //show
     public function contact(){
-        $contact = Contact::orderby('created_at', 'desc')->get();
+        $contact =Contact::when(request('key'),function($query){
+            $query->where('name','LIKE', '%' . request('key' ). '%');
+        }) ->orderBy('id','desc')
+         ->paginate(4);
+        // $contact = Contact::orderby('created_at', 'desc')->get();
         return view('admin.contact.show',compact('contact'));
     }
     public function createPage(){
@@ -21,24 +25,25 @@ class ContactController extends Controller
         // dd($request->all());
         $this->contactValidationCheck($request);
         $data = $this->requestContactData($request);
+        
         Contact::create($data);
-        dd($data);
+        // dd($data);
         return redirect()->route('admin#contact');
      }
      private function contactValidationCheck($request){
         $validationRules = [
             'name' => 'required',
             'email' => 'required',
-            'mesage' => 'required'
+            'message' => 'required',
         ];
        Validator::make($request->all(),$validationRules)->validate();
      }
      //request category data
     private function requestContactData($request){
         return[
-            'name' =>$request->contactName,
-            'email' =>$request->contactEmail,
-            'mesage' =>$request->contactMesage,
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'message' =>$request->message
         ];
     }
 }

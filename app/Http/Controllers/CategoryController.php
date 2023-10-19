@@ -28,6 +28,8 @@ class CategoryController extends Controller
         $this->categoryValidationCheck($request);
         $data = $this->requestCategoryData($request);
         Category::create($data);
+
+        // dd($data);
         return redirect()->route('category#list');
 
      }
