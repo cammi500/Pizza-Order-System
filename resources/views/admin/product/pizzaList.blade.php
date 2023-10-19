@@ -16,11 +16,11 @@
                     </div>
                     <div class="table-data__tool-right">
                         <a href="{{route('product#createPage')}}">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <button class="au-btn au-btn-icon bg-info au-btn--small">
                                 <i class="fa-solid fa-user"> </i>Add Product
                             </button>  
                         </a>
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <button class="au-btn au-btn-icon bg-info au-btn--small">
                             CSV download
                         </button>  
                     </div>

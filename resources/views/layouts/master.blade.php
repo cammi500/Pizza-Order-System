@@ -44,7 +44,7 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="{{asset('admin/images/icon/logo.png')}}" alt="CoolAdmin">
+                                <img src="{{asset('admin/images/icon/logo-blue.png')}}" alt="Cooper Admin">
                             </a>
                         </div>
                         @yield('content')
@@ -70,7 +70,7 @@
     <script src="{{asset('admin/vendor/counter-up/jquery.waypoints.min.js')}}"></script>
   
     <script src="{{asset('admin/vendor/circle-progress/circle-progress.min.js')}}"></script>
-    <script src="{{asset('admin/vendor/counter-up/jquery.counterup.min.js')}}">
+    <script src="{{asset('admin/vendor/counter-up/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
     <script src="{{asset('admin/vendor/chartjs/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('admin/vendor/select2/select2.min.js')}}">

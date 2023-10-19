@@ -42,7 +42,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="{{asset ('admin/images/icon/logo.png')}}" alt="Cool Admin" />
+                    <img src="{{asset ('admin/images/icon/logo-blue.png')}}" alt="Cooper Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -68,6 +68,10 @@
                         <li>
                             <a href="{{route('admin#userList')}}">
                                 <i class="fa-solid fa-users"></i>User List</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin#contact')}}">
+                                <i class="fa-solid fa-address-card"></i>Contant</a>
                         </li>
                     </ul>
                 </nav>

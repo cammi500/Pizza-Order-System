@@ -18,7 +18,6 @@
                         </div>
                         <hr>
                         <form action="{{route('category#create')}}" method="post" novalidate="novalidate">
-                           
                            @csrf
                             <div class="form-group">
                                 <label  class="control-label mb-1">Name</label>

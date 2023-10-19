@@ -189,12 +189,12 @@
             // console.log($data);
             $.ajax({
                 type :'get',
-                url :'http://127.0.0.1:8000/order/ajax/change/status',
+                url :'/order/ajax/change/status',
                 data : $data,
                 dataType : 'json',
                 
             })
-            // window.location.href = 'http://127.0.0.1:8000/order/orderList';
+            // window.location.href = '/order/orderList';
         })
     })
 </script>

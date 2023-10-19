@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -65,6 +66,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin#delete');
         Route::get('changeRole',[AdminController::class,'changeRole'])->name('admin#changeRole');
         //  Route::post('change/role/{id}',[AdminController::class,'ajaxChangeRole'])->name('admin#ajaxChangeRole');
+
+        //contact 
+        Route::get('contact',[ContactController::class,'contact'])->name('admin#contact');
+        Route::get('contact/create/page',[ContactController::class,'createPage'])->name('contact#createPage') ;
+        Route::post('create',[ContactController::class,'create'])->name('contact#create') ;
     });
 
     // products

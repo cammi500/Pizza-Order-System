@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="table-data__tool-right">
-                        <a href="{{route('category#createPage')}}">
+                        <a href="{{route('contact#createPage')}}">
                             <button class="au-btn au-btn-icon bg-info au-btn--small">
                                 <i class="fa-solid fa-user"> </i>Add Category
                             </button>  
@@ -25,18 +25,6 @@
                         </button>  
                     </div>
                 </div>
-
-                {{-- @if (Session('categorySuccess'))
-                <div class="col-3 offset-9">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ Session('categorySuccess') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif --}}
-
                 @if (Session('deleteSuccess'))
                 <div class="col-3 offset-9">
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -66,11 +54,11 @@
                 </div>
                 <div class="row my-2">
                     <div class="col-2 bg-white shadow-sm p-2 my-2 text-center">
-                        <h4>Total-{{$categories->total()}}</h4>
+                        <h4>Total-</h4>
                     </div>
                 </div>
               
-            @if (count($categories)!=0)
+             @if (count($contact)!=0)
 
                     <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2 text-center">
@@ -85,31 +73,31 @@
                         </thead>
                         <tbody>
                             
-                            @foreach ($categories as $category)
+                            @foreach ($contact as $c)
                                 <tr class="tr-shadow">
                                     <td>
-                                        {{ $category->id}}
+                                        {{ $c->id}}
                                     </td>
                                     <td class="col-5">
-                                        {{$category->name}}
+                                        {{$c->name}}
                                     </td>
                                     <td>
-                                        {{$category->created_at->format('j-F-Y')}}
+                                        {{$c->created_at->format('j-F-Y')}}
                                     </td>
                                     <td>
                                         <div class="table-data-feature p-2">
-                                            {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button>
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                 <i class="zmdi zmdi-edit"></i>
-                                            </button> --}}
-                                            <a href="{{route('category#edit',$category->id)}}">
+                                            </button> 
+                                             <a href="{{route('c#edit',$c->id)}}">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="edit">
                                                 <i class="zmdi zmdi-more"></i>
                                             </button>
                                         </a>
-                                            <a href="{{route('category#delete',$category->id)}}">
+                                            <a href="{{route('c#delete',$c->id)}}">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
@@ -124,10 +112,10 @@
                             
                         </tbody>
                     </table>
-                    {{-- paginate --}}
-                    <div class="mt-3">
+                    {{-- paginate  --}}
+                   <div class="mt-3">
                         {{
-                            $categories->appends(request()->query())->links()
+                            $contact->appends(request()->query())->links()
                         }}
                     </div>
                 </div>
@@ -136,7 +124,7 @@
                   <h3 class="text-secondary text-center mt-5">Their is no category</h3>
                   @endif
                 <!-- END DATA TABLE -->
-            </div>
+            </div>  
         </div>
     </div>
 </div>
