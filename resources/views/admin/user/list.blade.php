@@ -27,7 +27,7 @@
                         <tbody id="dataList">
                                 @foreach ($users as $user)
                                 
-                                <td class="col-1">
+                                <td class="col-2">
                                     @if($user->image==null)
                                     {{-- <img src="{{asset('image/default-user-image-png.png')}}" class="shadow-sm"/> --}}
                                       @if ($user->gender == 'male')
@@ -55,14 +55,30 @@
                                 {{-- <td>
                                     {{ $user->address}}
                                 </td> --}}
-                                <td>
+                            
                                   
-                                <select class="form-control statusChange">
+                                {{-- <select class="form-control statusChange">
                                 <option value="admin" @if($user->role =='admin') selected  @endif>Admin</option>
                                 <option value="user"  @if($user->role =='user') selected  @endif>User</option>
-                                </select>
-                                  
-                                </td>
+                                </select> --}}
+                                <td class="col-5">
+                                    <div class="table-data-feature p-2">
+                                       <div class="mr-3">
+                                            <select class="form-control statusChange">
+                                            <option value="admin" @if($user->role =='admin') selected  @endif>Admin</option>
+                                            <option value="user"  @if($user->role =='user') selected  @endif>User</option>
+                                            </select>
+                                        </div>
+                                    <div class="">
+                                        <a href="{{route('admin#delete',$user->id)}}">
+                                            <button class="item me-1" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                    </div>
+                                 </td>
+                                
                             </tr>
                                 @endforeach
                         </tbody>

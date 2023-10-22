@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
-    //show
+    // show
     public function contact(){
         $contact =Contact::when(request('key'),function($query){
             $query->where('name','LIKE', '%' . request('key' ). '%');
@@ -17,19 +17,20 @@ class ContactController extends Controller
         // $contact = Contact::orderby('created_at', 'desc')->get();
         return view('admin.contact.show',compact('contact'));
     }
-    public function createPage(){
-        return view('admin.contact.create');
+     //user
+     public function listPage(){
+        return view('user.contact.list');
     }
-     //create category
-     public function create(Request $request){
+    public function list(Request $request){
         // dd($request->all());
         $this->contactValidationCheck($request);
         $data = $this->requestContactData($request);
         
         Contact::create($data);
         // dd($data);
-        return redirect()->route('admin#contact');
-     }
+        return redirect()->route('user#home');
+    }
+  
      private function contactValidationCheck($request){
         $validationRules = [
             'name' => 'required',
@@ -46,4 +47,9 @@ class ContactController extends Controller
             'message' =>$request->message
         ];
     }
+
+
+
+
+   
 }

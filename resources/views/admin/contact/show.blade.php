@@ -7,24 +7,7 @@
         <div class="container-fluid">
             <div class="col-md-12">
                 <!-- DATA TABLE -->
-                <div class="table-data__tool">
-                    <div class="table-data__tool-left">
-                        <div class="overview-wrap">
-                            <h2 class="title-1">Contact List</h2>
-
-                        </div>
-                    </div>
-                    <div class="table-data__tool-right">
-                        <a href="{{route('contact#createPage')}}">
-                            <button class="au-btn au-btn-icon bg-info au-btn--small">
-                                <i class="fa-solid fa-user"> </i>Add Category
-                            </button>  
-                        </a>
-                        <button class="au-btn au-btn-icon bg-info au-btn--small">
-                            CSV download
-                        </button>  
-                    </div>
-                </div>
+            
                 @if (Session('deleteSuccess'))
                 <div class="col-3 offset-9">
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -64,49 +47,31 @@
                     <table class="table table-data2 text-center">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Message</th>
-                               
                                 <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                             @foreach ($contact as $c)
-                                <tr class="tr-shadow">
+                                <tr class="tr-shadow col-2">
+                                    <td class="text-center align-items-center">{{$c->id}}</td>
                                     <td>
                                         {{ $c->name}}
                                     </td>
-                                    <td class="col-3">
+                                    <td class="">
                                         {{$c->email}}
                                     </td>
-                                    <td class="col-5">
+                                    <td class="col-3">
                                         {{$c->message}}
                                         
                                     </td>
                                     <td>
                                         {{$c->created_at->format('j-F-Y')}}
-                                        {{-- <div class="table-data-feature p-2">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                <i class="zmdi zmdi-mail-send"></i>
-                                            </button>
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </button> 
-                                             <a href="{{route('c#edit',$c->id)}}">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="edit">
-                                                <i class="zmdi zmdi-more"></i>
-                                            </button>
-                                        </a>
-                                            <a href="{{route('c#delete',$c->id)}}">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
-                                        </a>
-                                                
-                                          
-                                        </div> --}}
+                                       
                                     </td>
                                 </tr>
                             @endforeach
@@ -116,9 +81,9 @@
                     </table>
                     {{-- paginate  --}}
                    <div class="mt-3">
-                        {{-- {{
+                        {{
                             $contact->appends(request()->query())->links()
-                        }} --}}
+                        }}
                     </div>
                 </div>
               @else

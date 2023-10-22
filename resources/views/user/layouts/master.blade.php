@@ -88,10 +88,10 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{route('user#home')}}" class="nav-item nav-link active">Home</a>
-                            {{-- <a href="cart.html" class="nav-item nav-link">My Cart</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
+                            {{-- {{-- <a href="cart.html" class="nav-item nav-link">My Cart</a> --}}
+                            <a href="{{route('user#listPage')}}" class="nav-item nav-link">Contact</a> 
                         </div>
-                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        {{-- <div class="navbar-nav ml-auto py-0 d-none d-lg-block"> --}}
                             {{-- <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>

@@ -90,7 +90,7 @@
                                <div class="text-center py-4">
                                    <a class="h6 text-decoration-none text-truncate" href="">{{$p->name}}</a>
                                    <div class="d-flex align-items-center justify-content-center mt-2">
-                                       <h5>{{$p->price}}</h5><h6 class="text-muted ml-2"><del>25000</del></h6>
+                                       <h5>{{$p->price}}</h5><h6 class="text-muted ml-2"><del>{{$p->price+2000}}</del></h6>
                                    </div>
                                    <div class="d-flex align-items-center justify-content-center mb-1">
                                        <small class="fa fa-star text-primary mr-1"></small>

@@ -126,6 +126,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('change/{id}',[UserController::class,'accountChange'])->name('user#accountChange');
 
         });
+        Route::prefix('contact')->group(function(){
+          Route::get('list',[ContactController::class,'listPage'])->name('user#listPage');
+          Route::post('list',[ContactController::class,'list'])->name('user#list');
+        });
 
         Route::prefix('ajax')->group(function(){
              Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');

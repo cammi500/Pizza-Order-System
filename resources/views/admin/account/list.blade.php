@@ -93,7 +93,7 @@
                                              @endif
                                     </td>
                                     <input type="hidden" id="adminId" value="{{$admin->id}}">
-                                    <td class="col-5">
+                                    <td class="">
                                         {{$admin->name}}
                                     </td>
                                     <td>
@@ -108,7 +108,7 @@
                                     {{-- <td>
                                         {{$admin->address}}
                                     </td> --}}
-                                     <td>
+                                     <td class="col-5">
                                         <div class="table-data-feature p-2">
                                            @if (Auth::user()->id == $admin->id)
                                                
@@ -135,7 +135,7 @@
                                            @endif
                                             
                                         </div>
-                                 
+                                     </td>
                                 </tr>
                             @endforeach
 

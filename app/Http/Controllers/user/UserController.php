@@ -30,6 +30,7 @@ class UserController extends Controller
     }
     // change Password 
     public function changePassword(Request $request){
+        // dd($request->all());
         $this->passwordValidationCheck($request);
 
         $user =User::select('password')->where('id',Auth::user()->id)->first();
