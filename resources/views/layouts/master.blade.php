@@ -44,7 +44,7 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="{{asset('admin/images/icon/logo-blue.png')}}" alt="Cooper Admin">
+                                <img src="{{asset('admin/images/icon/logo-no-background.svg')}}" alt="Cooper Admin">
                             </a>
                         </div>
                         @yield('content')

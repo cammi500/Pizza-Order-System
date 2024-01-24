@@ -87,7 +87,6 @@
             <div class="col">
                 <div class="owl-carousel related-carousel">
             @foreach ($pizzaList as $pizza)
-            
                     <div class="product-item bg-light">
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{{asset('storage/'.$pizza->image)}}" alt="" style="height: 250px">

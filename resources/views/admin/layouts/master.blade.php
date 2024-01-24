@@ -42,7 +42,8 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="{{asset ('admin/images/icon/logo-blue.png')}}" alt="Cooper Admin" />
+                    <img src="{{asset ('admin/images/icon/logo-no-background.svg')}}" width="80px" height="80px" alt="Cooper Admin" />
+                    <span class='font-size:20px'>ティーリアウン</span>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -88,7 +89,7 @@
                         <div class="header-wrap">
 
                             <span>
-                                Admin dashboards
+                                My dashboards
                             </span>
                             {{-- <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
